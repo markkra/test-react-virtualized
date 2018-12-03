@@ -9,9 +9,6 @@ function LoadingPlaceholder({ items }) {
       <div className="content-placeholder-text">
         <span className="content-placeholder-background" />
       </div>
-      <div className="content-placeholder-text">
-        <span className="content-placeholder-background" />
-      </div>
     </>
   );
 }
@@ -38,7 +35,13 @@ function Lister({ list, hasMore, isNextPageLoading, loadNextPage }) {
     const conversationItem = list[index];
 
     // If row content is complex, consider rendering a light-weight placeholder while scrolling.
-    const content = isScrolling ? <LoadingPlaceholder /> : conversationItem;
+    const content = isScrolling ? (
+      <div className="row">
+        <LoadingPlaceholder />
+      </div>
+    ) : (
+      <div className="row">{conversationItem}</div>
+    );
 
     // Style is required since it specifies how the row is to be sized and positioned.
     // React Virtualized depends on this sizing/positioning for proper scrolling behavior.
@@ -52,33 +55,31 @@ function Lister({ list, hasMore, isNextPageLoading, loadNextPage }) {
     // Key is also required by React to more efficiently manage the array of rows.
     return (
       <div key={key} style={style}>
-        <div className="row">{content}</div>
+        {content}
       </div>
     );
   }
 
   return (
-    <div className="container">
-      <InfiniteLoader isRowLoaded={isRowLoaded} loadMoreRows={loadMoreRows} rowCount={rowCount}>
-        {({ onRowsRendered, registerChild }) => (
-          <div className="List">
-            <AutoSizer>
-              {({ height, width }) => (
-                <List
-                  ref={registerChild}
-                  onRowsRendered={onRowsRendered}
-                  height={height}
-                  rowCount={rowCount}
-                  rowHeight={40}
-                  rowRenderer={rowRenderer}
-                  width={width}
-                />
-              )}
-            </AutoSizer>
-          </div>
-        )}
-      </InfiniteLoader>
-    </div>
+    <InfiniteLoader isRowLoaded={isRowLoaded} loadMoreRows={loadMoreRows} rowCount={rowCount}>
+      {({ onRowsRendered, registerChild }) => (
+        <div className="List">
+          <AutoSizer>
+            {({ height, width }) => (
+              <List
+                ref={registerChild}
+                onRowsRendered={onRowsRendered}
+                height={height}
+                rowCount={rowCount}
+                rowHeight={40}
+                rowRenderer={rowRenderer}
+                width={width}
+              />
+            )}
+          </AutoSizer>
+        </div>
+      )}
+    </InfiniteLoader>
   );
 }
 

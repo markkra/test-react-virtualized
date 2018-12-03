@@ -22,12 +22,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <Lister
-        list={this.state.list}
-        hasMore={this.state.hasMore}
-        isNextPageLoading={this.state.isLoading}
-        loadNextPage={this.loadNextPage}
-      />
+      <div className="container">
+        <Lister
+          list={this.state.list}
+          hasMore={this.state.hasMore}
+          isNextPageLoading={this.state.isLoading}
+          loadNextPage={this.loadNextPage}
+        />
+      </div>
     );
   }
 

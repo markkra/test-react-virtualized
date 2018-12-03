@@ -1,8 +1,7 @@
 .container {
   padding: 20px;
   display: flex;
-  height: 700px;
-  overflow: auto;
+  height: 600px;
 }
 .List {
   width: 100%;
@@ -17,6 +16,13 @@
   align-items: center;
   padding: 0 25px;
   background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  height: 39px;
+}
+
+.rowZ {
+  line-height: 39px;
+  background-color: orange;
   border-bottom: 1px solid #e0e0e0;
 }
 
@@ -82,11 +88,7 @@
   background-color: #ebebeb;
   display: block;
   height: 1em;
-  margin-bottom: 1em;
   overflow: hidden;
   position: relative;
   width: 90%;
-}
-.content-placeholder-text:last-of-type {
-  width: 60%;
 }
