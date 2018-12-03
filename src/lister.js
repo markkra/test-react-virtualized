@@ -1,6 +1,5 @@
 import React from 'react';
 import { AutoSizer, InfiniteLoader, List } from 'react-virtualized';
-import InfiniteScroll from 'react-infinite-scroller';
 import 'react-virtualized/styles.css'; // only needs to be imported once
 import './lister.styles.css';
 

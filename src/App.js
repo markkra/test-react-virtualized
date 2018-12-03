@@ -1,6 +1,5 @@
 import React from 'react';
 import deepFreeze from 'deep-freeze';
-import './App.css';
 import Lister from './lister';
 
 const FETCH_SIZE = 12;
@@ -72,7 +71,7 @@ class App extends React.Component {
       };
       setTimeout(() => {
         resolve(results);
-      }, 500);
+      }, 300);
     });
   }
 
