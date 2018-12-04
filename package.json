@@ -4,8 +4,11 @@
   "private": true,
   "dependencies": {
     "deep-freeze": "0.0.1",
+    "lodash": "^4.17.11",
+    "lorem-ipsum": "^1.0.6",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-infinite-scroll": "^0.1.5",
     "react-scripts": "2.1.1",
     "react-virtualized": "^9.21.0"
   },

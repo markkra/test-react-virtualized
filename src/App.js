@@ -1,15 +1,18 @@
 import React from 'react';
 import deepFreeze from 'deep-freeze';
+import loremIpsum from 'lorem-ipsum';
+
 import Lister from './lister';
 
-const FETCH_SIZE = 12;
+const FETCH_SIZE = 24;
+const MOCK_DATA_SIZE = 1000;
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      listItems: deepFreeze(this.createMockData(100000)),
+      listItems: deepFreeze(this.createMockData(MOCK_DATA_SIZE)),
       list: [],
       hasMore: false,
       isLoading: false
@@ -50,15 +53,18 @@ class App extends React.Component {
   }
 
   loadNextPage() {
-    if (this.state.hasMore) {
-      this.getPage(this.state.nextIndex, this.state.nextIndex + FETCH_SIZE).then(data =>
+    if (this.state.hasMore && !this.state.isLoading) {
+      this.getPage(this.state.nextIndex, this.state.nextIndex + FETCH_SIZE).then(data => {
+        const { nextIndex, hasMore, list } = data;
+
+        console.log(`Setting state: nextIndex ${nextIndex}, hasMore ${hasMore}`);
         this.setState({
-          list: [...this.state.list, ...data.list],
-          hasMore: data.hasMore,
-          nextIndex: data.nextIndex,
+          list: [...this.state.list, ...list],
+          hasMore: hasMore,
+          nextIndex: nextIndex,
           isLoading: false
-        })
-      );
+        });
+      });
     }
   }
 
@@ -78,11 +84,23 @@ class App extends React.Component {
   }
 
   createMockData(countItems) {
-    const listItems = [];
-    for (let i = 0; i < countItems; i++) {
-      listItems.push(`Row ${i}`);
-    }
-    return listItems;
+    return Array(countItems)
+      .fill()
+      .map((val, idx) => {
+        return {
+          name: `Row ${idx}`,
+          text: loremIpsum({
+            count: 1,
+            units: 'sentences',
+            sentenceLowerBound: 4,
+            sentenceUpperBound: 8
+          })
+        };
+      });
+    // for (let i = 0; i < countItems; i++) {
+    //   listItems.push(`Row ${i}`);
+    // }
+    // return listItems;
   }
 }
 

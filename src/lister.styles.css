@@ -12,12 +12,12 @@
 
 .row {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  align-items: left;
   padding: 0 25px;
   background-color: #fff;
   border-bottom: 1px solid #e0e0e0;
-  height: 39px;
+  height: 59px;
 }
 
 .rowZ {
@@ -84,6 +84,17 @@
   will-change: transform;
 }
 
+.content-placeholder-text:first-of-type {
+  background-color: #ebebeb;
+  display: block;
+  height: 1em;
+  overflow: hidden;
+  position: relative;
+  width: 50%;
+  margin-left: 25px;
+  margin-bottom: 5px;
+}
+
 .content-placeholder-text {
   background-color: #ebebeb;
   display: block;
@@ -91,4 +102,5 @@
   overflow: hidden;
   position: relative;
   width: 90%;
+  margin-left: 25px;
 }
